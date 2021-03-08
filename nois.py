@@ -147,7 +147,6 @@ def perlin(n,m):
     
     
     scale=int(n/m)+1
-    
     vectors=np.random.uniform(-1,1,(scale,scale,2)) #grid of random vectors
     vectors[-1,:]=vectors[0,:]
     vectors[-2,:]=vectors[1,:]
@@ -181,10 +180,6 @@ def plot(n,data,name="test"):
     x=np.linspace(0,n,n)
     y=np.linspace(0,n,n)
     plot=ax.pcolormesh(x, y, data,cmap="Greys")
-    #X, Y = np.meshgrid(x, y)
-    #plot=ax.contourf(X, Y, data, 15, cmap=plt.cm.bone,alpha=0.02)
-    # plot = ax.contourf(x, y, data, hatches=['-', '/', '\\', '//'],
-    #              cmap='gray', extend='both', alpha=0.5)
 
     #plt.savefig("%s"%(name), dpi=300)
     
@@ -196,7 +191,6 @@ def fractal(n,m,k):
      
      """
      maximum=2**n
-     
      data=np.zeros((maximum,maximum))
      for i in range(k):
          temp=perlin(maximum,2**(m-i))*(2**(-(m+i)))
@@ -216,9 +210,7 @@ def curl(n,m,k,balls,updates,max_vel=5,wildness=25,x_scale=50,y_scale=100):
     size=len(pot[0])
     vector_x,vector_y=vector_field(pot,wildness,x_scale,y_scale)
     x=np.gradient(vector_y,axis=1)
-    #x=x+np.amax(x)/10
     y=-np.gradient(vector_x,axis=0)
-    #y=y+np.amax(y)/10
     x,y=dipoles(x, y, 8, 100000)
     balls=Ball(size=size,n=balls,max_vel=max_vel)
     x_hist,y_hist=balls.drive(x, y, updates)
@@ -234,8 +226,6 @@ def animate_flow(x_hist,y_hist):
     plt.style.use("default")
    
     plt.axis('off')
-   
-    
     #c_list=["#AD450C","#FF813D","#FA6E23","#00ADA7","#23FAF2","white","black"]
     #c_list=["#04577A","#53C8FB","#07B1FA","#28627A","#068CC7","white"]
     #c_list=["#007D32","#6BFFA6","#00FC65","#5B8069","#00CC50","#04577A","#53C8FB","#07B1FA","#28627A","#068CC7","white"]
@@ -271,12 +261,12 @@ def non_overlap_plot(x,y):
     
     #c_list=["white","white","white","#7A2418","#FB8C7D","#FA4932","#7A443D","#C23827"]
     #c_list=["black","white","#FCED0D","#FFF200","white","black","black","black","white","white"]
-    #c_list=["#007D32","#6BFFA6","#00FC65","#5B8069","#00CC50","#04577A","#53C8FB","#07B1FA","#28627A","#068CC7","white"]
+    c_list=["#007D32","#6BFFA6","#00FC65","#5B8069","#00CC50","#04577A","#53C8FB","#07B1FA","#28627A","#068CC7","white"]
     #c_list=["#38C8F5","#54D7FF","#1686A8","#A86D32","#F58C76","#A86759","#EBDC3B","#ED721A"]
     #c_list=["#1972D1","#D13224","#0ED0D1","#D19124","#17D16A","#5AD1B3","#D18B28"]
     #c_list=["#04577A","#53C8FB","#07B1FA","#28627A","#068CC7","white"]
     #c_list=["#7A2418"]
-    c_list=["grey","black","white"]
+    #c_list=["grey","black","white"]
     
     #c_list=["white"]
     #s_list=[30]
@@ -300,16 +290,16 @@ def non_overlap_plot(x,y):
     size=(max(x),max(y))
     size=max(size)
     print(size)
-    #s_list=size/np.array([100,50,200,400,150,170])
-    s_list=size/np.array([190,200,200,400,150,170,100,85,125,1000,80,90,75,])
+    s_list=size/np.array([100,50,200,400,150,170])
+    #s_list=size/np.array([190,200,200,400,150,170,100,85,125,1000,80,90,75,])
     #s_list=size/np.array([100,110,90,85,105,115])*1.25
     #s_list=size/np.array([100])
     count=0
     
     
-    a=rand.randint(0,len(x)/5)
-    b=(len(x)/5-a)*rand.random()
-    a=[a,a+5000,a+10000,a+15000,a+20000,a+25000]
+    # a=rand.randint(0,len(x)/5)
+    # b=(len(x)/5-a)*rand.random()
+    # a=[a,a+5000,a+10000,a+15000,a+20000,a+25000]
     alpha=[0.15,0.2,0.3,0.4]
     
     while count<len(x):
@@ -317,7 +307,7 @@ def non_overlap_plot(x,y):
         color=rand.choice(c_list)
         t=rand.choice(s_list)
         ty=t
-        step=int(rand.randint(count, len(x))/20)
+        step=int(rand.randint(count, len(x))/10)
         # temp_x=x[a[count]:a[count]+int(b)]
         # temp_y=y[a[count]:a[count]+int(b)]
         
@@ -327,7 +317,6 @@ def non_overlap_plot(x,y):
         # temp_y=y
         
         temp_x=(np.around(temp_x/t))*t
-        
         temp_y=(np.around(temp_y/ty))*ty
 
         points=[(temp_x[i],temp_y[i]) for i in range(len(temp_x))]
@@ -337,9 +326,9 @@ def non_overlap_plot(x,y):
         temp_y=np.array(points)[:,1]
                                              
 
-        s = ((ax.get_window_extent().width*(t/(0.5*np.pi) ) / (size) * 72./fig.dpi) ** 2) #r=0.5 data units
-       
-        ax.scatter(temp_x,temp_y,s=s,alpha=rand.choice(alpha)/2,color=color,)
+        s = ((ax.get_window_extent().width*(t/(0.5*np.pi) ) / (size) * 72./fig.dpi) ** 2) 
+        #r=0.5 data units
+        ax.scatter(temp_x,temp_y,s=s*2,alpha=rand.choice(alpha)/2,color=color,)
         #ax.patch.set_facecolor('#ED723B')
         #ax.patch.set_facecolor('#D15028')
         ax.patch.set_alpha(0.5)
@@ -348,6 +337,10 @@ def non_overlap_plot(x,y):
     
 
 def plot_flow(x_hist,y_hist):
+    """
+    This is quite inefficient due to plotting each line seperately. This is needed
+    if you want matplotlib to apply alpha properly. Will consider changing libraries
+    """
     plt.figure()
     plt.clf()
     fig = plt.gcf()
@@ -360,8 +353,6 @@ def plot_flow(x_hist,y_hist):
     plt.style.use("default")
     #plt.style.use('dark_background')
  
-   
-    
     #c_list=["#AD450C","#FF813D","#FA6E23","#00ADA7","#23FAF2","white","black"]
     #c_list=["#04577A","#53C8FB","#07B1FA","#28627A","#068CC7","white"]
     # c_list=["#007D32","#6BFFA6","#00FC65","#5B8069","#00CC50","#04577A","#53C8FB","#07B1FA","#28627A","#068CC7","white"]
@@ -549,7 +540,7 @@ def run_circle(n,m,k):
     # theta2=np.linspace(0,-np.pi,size)
     # plot_circle(columns,theta2)    
 #
-run(7,5,2,3000,1000,max_vel=5,wildness=5,x_scale=9,y_scale=9)
+run(7,5,2,3000,1000,max_vel=5,wildness=25,x_scale=50,y_scale=50)
 #curl(7,6,3,3000,1000,max_vel=5,wildness=25,x_scale=50,y_scale=50)
 #curl(9,3,5000,1000,max_vel=25,wildness=15,x_scale=5,y_scale=10)
 #perlin(2**9,2**3)
