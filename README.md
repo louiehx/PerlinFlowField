@@ -12,12 +12,6 @@ Honestly I wrote that bit a couple of months ago so its a bit hard to read,
 but once you watch the video it should make sense what its doing. Note you 
 dont need to understand that bit to produce the images.
 
-I have added some brief descriptions of the functions that I thought may
-not be immediately clear. Just make sure you use n and k and intergers and 
-have n>k.
-
-The ball class function works with arrays.
-
 ---------------------------------------------
 
 
@@ -25,7 +19,7 @@ To run,
 
 simply call the run function,
 
-n and k are used to set up the noise grid. n>k and they are intergers.
+n k and m are used to set up the noise grid. n>k and they are intergers.
 The higher the values the more detailed the noise plot will be, and the
 closer they are the more "fractally" it will be (k=0 recovers perlin noise).
 I dont recommend going above n=10 as you will have longer run times.
@@ -52,9 +46,11 @@ In terms of plotting I suggest trying your own colour schemes
 
 Its also fun to play around with the marker size and opacity
 
-Note I plot then as a scatter graph as otherwise you get horrible lines across the
-image from when the particles are tranported to the other side when they reach
-the edge.
+You can use the "non overlap plot" to plot quickly, it runs maybe 5-10x faster than the regular plotting.
+The plotting is the bottle neck of the code and I should change it at somepoint.
 
-
+-----------
+I also definitely recommend the fork someone made from it.
+https://github.com/punkduckable/PerlinFlowField
+this has some nice docstrings and some simple qol adjustments (saving loading data etc)
  
