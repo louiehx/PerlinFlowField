@@ -355,13 +355,13 @@ def plot_flow(x_hist,y_hist):
  
     #c_list=["#AD450C","#FF813D","#FA6E23","#00ADA7","#23FAF2","white","black"]
     #c_list=["#04577A","#53C8FB","#07B1FA","#28627A","#068CC7","white"]
-    # c_list=["#007D32","#6BFFA6","#00FC65","#5B8069","#00CC50","#04577A","#53C8FB","#07B1FA","#28627A","#068CC7","white"]
-    c_list=["#AD450C","#FF813D","#FA6E23","#00ADA7","#23FAF2","white","black"]
-    ##c_list=["#7A2418","#FB8C7D","#FA4932","#7A443D","#C23827"]
+    #c_list=["#007D32","#6BFFA6","#00FC65","#5B8069","#00CC50","#04577A","#53C8FB","#07B1FA","#28627A","#068CC7","white"]
+    #c_list=["#AD450C","#FF813D","#FA6E23","#00ADA7","#23FAF2","white","black"]
+    c_list=["#7A2418","#FB8C7D","#FA4932","#7A443D","#C23827"]
     #c_list=["black","white","#FCED0D","#FFF200","white","black","black","black","white","white"]
     #c_list=["#7A2418"]
-    s_list=[1,1,1,1,5,5,5,5,10,5,2,15,25,30,5,10]
-    #s_list=[15]
+    #s_list=[1,1,1,1,5,5,5,5,10,5,2,15,25,30,5,10]
+    s_list=[15]
     
     for i in range(len(x_hist)):
         # color=rand.choice(c_list)
@@ -379,7 +379,7 @@ def plot_flow(x_hist,y_hist):
        #plt.scatter(x_hist[i],y_hist[i],s=s,alpha=0.11,color=color)
     plt.show()    
     name=str(rand.random())
-    plt.savefig("redddfd",dpi=600)
+    #plt.savefig("redddfd",dpi=600)
     #plt.savefig('urban.svg', format='svg', dpi=1200)
 
 
@@ -498,8 +498,8 @@ def run(n,m,k,balls,updates,max_vel=5,wildness=25,x_scale=500,y_scale=1000):
     balls=Ball(size=size,n=balls,max_vel=max_vel)
     x_hist,y_hist=balls.drive(vector_x, vector_y, updates)
     
-    #plot_flow(x_hist, y_hist)
-    non_overlap_plot(x_hist, y_hist)
+    plot_flow(x_hist, y_hist)
+    #non_overlap_plot(x_hist, y_hist)
     #plot(n,data)
     
     print(time.time()-s)
@@ -540,7 +540,7 @@ def run_circle(n,m,k):
     # theta2=np.linspace(0,-np.pi,size)
     # plot_circle(columns,theta2)    
 #
-run(7,5,2,3000,1000,max_vel=5,wildness=25,x_scale=50,y_scale=50)
+run(7,5,2,3000,1000,max_vel=5,wildness=50,x_scale=50,y_scale=50)
 #curl(7,6,3,3000,1000,max_vel=5,wildness=25,x_scale=50,y_scale=50)
 #curl(9,3,5000,1000,max_vel=25,wildness=15,x_scale=5,y_scale=10)
 #perlin(2**9,2**3)
